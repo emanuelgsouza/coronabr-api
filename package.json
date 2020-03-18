@@ -1,0 +1,17 @@
+{
+  "name": "coronabr-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/emanuelgsouza/coronabr-api.git",
+  "author": "Emanuel Souza <emanuelgdesouza@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2"
+  },
+  "scripts": {
+    "parser": "node parser/index.js"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
+  }
+}
