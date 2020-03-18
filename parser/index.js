@@ -31,13 +31,33 @@ const getDataToSave = (locationType, data, lastUpdated) => {
 
 const processData = data => {
   return data.map(item => {
+    const { date, time } = item
+    const [day, month, year] = date.split('/')
+
     return {
-      ...item,
+      date: `${year}-${month}-${day}`,
+      time,
+      fullDate: `${year}-${month}-${day} ${time}:00`,
       values: item.values.map(stateData => {
         return {
           ...stateData,
           state: STATES_UIDS[stateData.uid]
         }
+      }),
+      accumulated: item.values.reduce((acc, data) => {
+        acc['suspects'] += data.suspects || 0
+        acc['refuses'] += data.refuses || 0
+        acc['cases'] += data.cases || 0
+        acc['suspects'] += data.suspects || 0
+        acc['deaths'] += data.deaths || 0
+
+        return acc
+      }, {
+        suspects: 0,
+        refuses: 0,
+        cases: 0,
+        suspects: 0,
+        deaths: 0
       })
     }
   })
