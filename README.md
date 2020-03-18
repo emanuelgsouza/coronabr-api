@@ -46,7 +46,7 @@ Retorna uma lista com as datas de análise e para cada data, os valores por Esta
   "error": false,
   "timestamp": 1584501283740,
   "data": {
-    "values": [
+    "dates": [
       {
         "date": "2020-03-17",
         "time": "18:10",
@@ -83,20 +83,18 @@ Retorna o dado da rota `/states`, mas apenas para o último dia de dado avaliado
   "error": false,
   "timestamp": 1584501283740,
   "data": {
-    "values": [
-      {
-        "date": "2020-03-17",
-        "time": "18:10",
-        "fullDate": "2020-03-17 18:10:00",
-        "values": [],
-        "accumulated": {
-          "suspects": 17638,
-          "refuses": 1890,
-          "cases": 291,
-          "deaths": 1
-        }
+    "today": {
+      "date": "2020-03-17",
+      "time": "18:10",
+      "fullDate": "2020-03-17 18:10:00",
+      "values": [],
+      "accumulated": {
+        "suspects": 17638,
+        "refuses": 1890,
+        "cases": 291,
+        "deaths": 1
       }
-    ],
+    },
     "lastUpdated": 1584499854241
   }
 }
