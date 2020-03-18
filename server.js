@@ -37,7 +37,7 @@ fastify.get('/states', async (request) => {
       error: false,
       timestamp: Date.now(),
       data: {
-        values: brData.data,
+        dates: brData.data,
         lastUpdated: brData.lastUpdated
       }
     }
@@ -47,7 +47,7 @@ fastify.get('/states', async (request) => {
     error: false,
     timestamp: Date.now(),
     data: {
-      values: getDataFromRange(brData.data, to, from),
+      dates: getDataFromRange(brData.data, to, from),
       lastUpdated: brData.lastUpdated
     }
   }
@@ -58,7 +58,7 @@ fastify.get('/today', async () => {
     error: false,
     timestamp: Date.now(),
     data: {
-      values: brData.data[brData.data.length - 1],
+      today: { ...brData.data[brData.data.length - 1] },
       lastUpdated: brData.lastUpdated
     }
   }
