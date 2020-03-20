@@ -2,6 +2,16 @@
 
 API de acompanhamento de casos do COVID-19 no Brasil
 
+## Fontes
+
+### Our World in Data
+
+Para este projeto, é o dado oficial para análise dos casos do COVID-19. Após o dia 18 de Marco de 2020, estamos considerando estes casos devido ao fato da plataforma oficial do Governo não disponibilizar mais o website. Não deixe conferir o link oficial do [Our World in Data - Coronavirus Source Data](https://ourworldindata.org/coronavirus-source-data).
+
+Portanto, os dados na pasta `data/ivis` estão desatualizados.
+
+---
+
 ## Instruções para execução local
 
 Antes de mais nada, é necessário configurar as variáveis de ambiente. Para isso, copie e cole o conteúdo de `.env.sample` para um arquivo `.env`.
