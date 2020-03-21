@@ -11,16 +11,18 @@ const Papa = require('papaparse')
 
 const downloadData = url => {
   return new Promise((resolve, reject) => {
+    const resData = []
     https.get(url, res => {
       res
-        .on('data', data => resolve(data.toString()))
+        .on('data', data => resData.push(data.toString()))
+        .on('end', () => resolve(resData.join('')))
         .on('error', error => reject(error))
     })
   })
 }
 
 const getData = async () => {
-  const URL = 'https://covid.ourworldindata.org/data/who/full_data.csv'
+  const URL = 'https://covid.ourworldindata.org/data/ecdc/full_data.csv'
   const csvString = await downloadData(URL)
 
   const result = Papa.parse(csvString, {
@@ -46,7 +48,9 @@ const factoryData = item => {
   }
 }
 
-const transformData = (data = []) => data.map(factoryData)
+const transformData = (data = []) => {
+  return data.map(factoryData)
+}
 
 const parserFromOWD = async (country = 'Brazil') => {
   const data = await getData()
