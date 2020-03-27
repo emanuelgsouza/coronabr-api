@@ -3,6 +3,7 @@ const path = require('path')
 
 // const { parserFromIvis } = require('./loaders/ivis')
 const { parserFromOWD } = require('./loaders/owd')
+const { checkIsDateUpdated } = require('./utils')
 
 const factoryOWDDataToSave = (location = '', data = []) => {
   const lastUpdated = Date.now()
@@ -15,12 +16,18 @@ const factoryOWDDataToSave = (location = '', data = []) => {
 }
 
 const parser = async () => {
+  console.log('- Iniciando parser')
+
   try {
-    const owdData = await parserFromOWD('Brazil')
+    const externalData = await parserFromOWD('Brazil')
+    if (checkIsDateUpdated(externalData)) {
+      console.log('- JSON local já está atualizado')
+      return
+    }
 
-    const dataToSave = factoryOWDDataToSave('brazil', owdData)
-
+    const dataToSave = factoryOWDDataToSave('brazil', externalData)
     fs.writeFileSync(path.join(__dirname, '../data/brazil.json'), dataToSave)
+    console.log('- Dados salvos com sucesso')
   } catch (e) {
     console.error(e.message)
   }
