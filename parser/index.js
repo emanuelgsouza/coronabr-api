@@ -25,6 +25,7 @@ const parser = async () => {
       return
     }
 
+    console.log('- Dados atuais estão desatualizados, salvando dados mais atuais')
     const dataToSave = factoryOWDDataToSave('brazil', externalData)
     fs.writeFileSync(path.join(__dirname, '../data/brazil.json'), dataToSave)
     console.log('- Dados salvos com sucesso')

@@ -11,7 +11,7 @@ const checkIsDateUpdated = (externalResults = []) => {
     const brazilData = require(brazilDataPath)
     const { date } = getLastData(brazilData.data)
     const { date: externalDate } = getLastData(externalResults)
-    return date === externalDate
+    return new Date(date) >= new Date(externalDate)
   }
 
   console.log('--- Dados locais não existem')
