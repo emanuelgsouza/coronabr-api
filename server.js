@@ -1,6 +1,6 @@
 require('dotenv').config()
 const pkg = require('./package.json')
-const brData = require('./data/data-br.json')
+const brData = require('./data/brazil.json')
 
 const getDataFromRange = (values, to, from) => {
   const toTimestamp = new Date(to).getTime()
@@ -28,7 +28,18 @@ fastify.get('/', async () => {
   }
 })
 
-fastify.get('/states', async (request) => {
+fastify.get('/today', async () => {
+  return {
+    error: false,
+    timestamp: Date.now(),
+    data: {
+      today: { ...brData.data[brData.data.length - 1] },
+      lastUpdated: brData.lastUpdated
+    }
+  }
+})
+
+fastify.get('/period', async (request) => {
   const { query = {} } = request
   const { to, from } = query
 
@@ -48,17 +59,6 @@ fastify.get('/states', async (request) => {
     timestamp: Date.now(),
     data: {
       dates: getDataFromRange(brData.data, to, from),
-      lastUpdated: brData.lastUpdated
-    }
-  }
-})
-
-fastify.get('/today', async () => {
-  return {
-    error: false,
-    timestamp: Date.now(),
-    data: {
-      today: { ...brData.data[brData.data.length - 1] },
       lastUpdated: brData.lastUpdated
     }
   }
