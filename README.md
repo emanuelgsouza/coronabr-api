@@ -47,42 +47,44 @@ Retorna a versão da API e mais algumas informações:
 }
 ```
 
-### /states -> rota dos estados
+### /period -> rota dos estados
 
-Retorna uma lista com as datas de análise e para cada data, os valores por Estado da Federação e os valores acumulados
+Retorna uma lista com os números de casos e mortes por dia no Brasil. Um exemplo de JSON de resposta:
 
 ```json
 {
   "error": false,
-  "timestamp": 1584501283740,
+  "timestamp": 1587774879474,
   "data": {
     "dates": [
       {
-        "date": "2020-03-17",
-        "time": "18:10",
-        "fullDate": "2020-03-17 18:10:00",
-        "values": [],
-        "accumulated": {
-          "suspects": 17638,
-          "refuses": 1890,
-          "cases": 291,
-          "deaths": 1
-        }
+        "date": "2020-03-01",
+        "new_cases": 1,
+        "new_deaths": 0,
+        "cases": 2,
+        "deaths": 0
+      },
+      {
+        "date": "2020-03-02",
+        "new_cases": 0,
+        "new_deaths": 0,
+        "cases": 2,
+        "deaths": 0
       }
     ],
-    "lastUpdated": 1584499854241
+    "lastUpdated": 1587724986055
   }
 }
 ```
 
-No campo `values`, por data, está os valores dos campos em `accumulated` discriminado por Estado. Lembrand que todo Estado terá os campos preenchidos.
-
 Aceita como querystring os seguintes campos para filtrar por dia:
 
-* **from**: desde quando se quer trazer os dados
-* **to**: até quando se quer trazer os dados
+- **from**: desde quando se quer trazer os dados
+- **to**: até quando se quer trazer os dados
 
-Sendo assim, no exemplo de requisição `/states?from=2020-03-07&to=2020-03-17`, o objetivo é trazer os dados do dia 07 de Março até 17 de Março.
+Sendo assim, no exemplo de requisição `/period?from=2020-03-07&to=2020-03-17`, o objetivo é trazer os dados do dia 07 de Março até 17 de Março.
+
+Se não for passado nenhum período, toda a série histórica será retornada
 
 ### /today -> rota que mostra as estatísticas para hoje
 
